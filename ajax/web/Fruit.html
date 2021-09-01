@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询水果</title>
+</head>
+<body>
+<script>
+
+    function search(){
+        var ajax = new XMLHttpRequest();
+        ajax.onreadystatechange = function (){
+            if (ajax.status == 200 && ajax.readyState == 4){
+                var jsonData = ajax.responseText;
+                var json = eval("("+jsonData+")");
+                document.getElementById("name").value=json.name;
+                document.getElementById("price").value=json.price;
+            }
+        }
+        ajax.open("GET","fruit1?id="+document.getElementById("id").value,true);
+        ajax.send();
+    }
+</script>
+  <input type="text" name="id" id="id">id
+  <br><input type="text" name="name" id="name">名称
+  <br><input type="text" name="price" id="price">价格
+  <input type="button" value="提交" id="start" onclick="search()">
+
+</body>
+</html>
